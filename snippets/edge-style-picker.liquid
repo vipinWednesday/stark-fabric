@@ -1,0 +1,72 @@
+{% comment %}
+  Edge Style Picker Snippet
+  This snippet adds a dropdown for selecting edge styles, populated from the product's metafield.
+{% endcomment %}
+
+<div class="edge-style-container">
+  <h5 class="picker-header">Edge Style</h5>
+  <select id="EdgeStyleSelect" name="properties[Edge style]" class="edge-style-select" form="{{product_form_id}}">
+    {% if product.metafields.custom.edge_style %}
+      {% assign edge_styles = product.metafields.custom.edge_style.value %}
+      {% for style in edge_styles %}
+        <option value="{{ style }}">{{ style }}</option>
+      {% endfor %}
+    {% else %}
+      <option value="">No edge styles available</option>
+    {% endif %}
+  </select>
+</div>
+
+<style>
+  /* Edge Style Container */
+  .edge-style-container {
+    border: 1px solid #d9d9d9;
+    padding: 15px;
+    margin-top: 20px;
+    border-radius: 8px;
+    max-width: 400px; /* Adjust width if necessary */
+  }
+  .picker-header{
+    margin: 0;
+    margin-bottom: 1rem;
+    font-weight: bold;
+  }
+
+  /* Label Styling */
+  .edge-style-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-size: 16px;
+    color: #333; /* Text color */
+  }
+
+  /* Select Dropdown Styling */
+  .edge-style-select {
+    width: 100%;
+    padding: 10px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #fff;
+    color: #333;
+  }
+
+  .edge-style-select:focus {
+    border-color: #007ace; /* Shopify Dawn theme blue on focus */
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 122, 206, 0.2);
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const edgeStyleSelect = document.getElementById('EdgeStyleSelect');
+
+    edgeStyleSelect.addEventListener('change', function() {
+      const selectedEdgeStyle = this.value;
+      console.log('Selected Edge Style:', selectedEdgeStyle);
+      // Optionally, update hidden input or perform other actions here
+    });
+  });
+</script>

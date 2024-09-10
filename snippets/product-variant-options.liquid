@@ -1,0 +1,213 @@
+{%- comment %}
+  Renders product variant options
+{%- endcomment %}
+
+{%- liquid
+  assign product_form_id = 'product-form-' | append: section.id
+-%}
+
+<div class="variant-options-container">
+  {%- for value in option.values -%}
+    {%- assign variant = product.variants | where: 'option1', value | first -%}
+    {%- if variant and variant.featured_image -%}
+      {%- assign swatch_image_url = variant.featured_image.src | image_url: width: 50 -%}
+      {%- assign value.swatch.image = swatch_image_url -%}
+    {%- else -%}
+       {%- assign  swatch_image_url = null -%}
+       {%- assign value.swatch.image = null -%}
+    {%- endif -%}
+
+    {%- assign option_disabled = true -%}
+    {%- if value.available -%}
+      {%- assign option_disabled = false -%}
+    {%- endif -%}
+
+    {%- capture input_id -%}
+      {{ section.id }}-{{ option.position }}-{{ forloop.index0 }}-{{ product.id }}
+    {%- endcapture -%}
+
+    {%- capture input_name -%}
+      {{ option.name }}-{{ option.position }}-{{ product.id }}
+    {%- endcapture -%}
+
+    {%- capture input_dataset -%}
+      data-product-url="{{ value.product_url }}"
+      data-option-value-id="{{ value.id }}"    
+    {%- endcapture -%}
+
+    {%- capture label_unavailable -%}
+      <span class="visually-hidden label-unavailable">
+        {{- 'products.product.variant_sold_out_or_unavailable' | t -}}
+      </span>
+    {%- endcapture -%}
+    {%- if picker_type == 'swatch' -%}
+      {%- capture help_text -%}
+        <span class="visually-hidden">{{ value | escape }}</span>
+        {{ label_unavailable }}
+      {%- endcapture -%}
+      {%
+        render 'swatch-input',
+        id: input_id,
+        name: input_name,
+        value: value | escape,
+        swatch: value.swatch,
+        product_form_id: product_form_id,
+        checked: value.selected,
+        visually_disabled: option_disabled,
+        shape: block.settings.swatch_shape,
+        help_text: help_text,
+        additional_props: input_dataset,
+        swatch_image_url: swatch_image_url
+        variant_id:variant.id
+      %}
+    {%- elsif picker_type == 'button' -%}
+      <input
+        type="radio"
+        id="{{ input_id }}"
+        name="{{ input_name | escape }}"
+        value="{{ value | escape }}"
+        form="{{ product_form_id }}"
+        {% if value.selected %}
+          checked
+        {% endif %}
+        {% if option_disabled %}
+          class="disabled"
+        {% endif %}
+        {{ input_dataset }}
+      >
+      <label for="{{ input_id }}" class="button-label">
+        {{ value -}}
+        {{ label_unavailable }}
+      </label>
+    {%- endif -%}
+  {%- endfor -%}
+</div>
+
+{%- for value in option.values -%}
+  {%- if value.selected and value.available -%}
+    {%- if option.name == 'Rug shape' -%}
+      <!-- Show additional input fields based on selected shape -->
+      <div class="shape-details-container">
+        {% assign diameter = product.metafields.custom.diameter.value | split: ' ' %}
+        {% assign length = product.metafields.custom.length.value | split: ' ' %}
+        {% assign width = product.metafields.custom.width.value | split: ' ' %}
+        {% assign diameter_number = diameter[0] %}
+        {% assign diameter_unit = diameter[1] %}
+
+        {% assign length_number = length[0] %}
+        {% assign length_unit = length[1] %}
+
+        {% assign width_number = width[0] %}
+        {% assign width_unit = width[1] %}
+
+        {% if value == 'Round' %}
+          <label for="DiameterSelect" class="form-label">Diameter ({{ diameter_unit }}):</label>
+          <select id="DiameterSelect" name="diameter" class="form-select">
+            {% for i in (5..diameter_number) %}
+              <option value="{{ i }}">
+                {{ i }}
+                {{ diameter_unit }}
+              </option>
+            {% endfor %}
+          </select>
+        {% elsif value == 'Rectangular' %}
+          <label for="LengthSelect" class="form-label">Length ({{ length_unit }}):</label>
+          <select id="LengthSelect" name="length" class="form-select">
+            {% for i in (5..length_number) %}
+              <option value="{{ i }}">
+                {{ i }}
+                {{ length_unit }}
+              </option>
+            {% endfor %}
+          </select>
+          <label for="WidthSelect" class="form-label">Width ({{ width_unit }}):</label>
+          <select id="WidthSelect" name="width" class="form-select">
+            {% for i in (5..width_number) %}
+              <option value="{{ i }}">
+                {{ i }}
+                {{ width_unit }}
+              </option>
+            {% endfor %}
+          </select>
+        {% elsif value == 'Square' %}
+          <label for="SquareLengthSelect" class="form-label">Length ({{ length_unit }}):</label>
+          <select id="SquareLengthSelect" name="length" class="form-select">
+            {% for i in (5..length_number) %}
+              <option value="{{ i }}">
+                {{ i }}
+                {{ length_unit }}
+              </option>
+            {% endfor %}
+          </select>
+        {% endif %}
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+{%- endfor -%}
+
+<style>
+  /* Custom styling for the variant options */
+  .variant-options-container {
+    margin-bottom: 20px;
+  }
+
+  .button-label {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .shape-details-container {
+    margin-top: 20px;
+  }
+
+  .form-label {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 5px;
+  }
+
+  .form-select {
+    width: 100%;
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #dcdcdc;
+    background-color: #ffffff;
+    font-size: 14px;
+    margin-bottom: 10px;
+  }
+
+  .form-select:focus {
+    border-color: #5e5e5e;
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
+  }
+
+  .disabled {
+    cursor: not-allowed;
+    opacity: 0.6;
+  }
+</style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const variantContainers = document.querySelectorAll('.variant-options-container');
+
+    variantContainers.forEach(function (container) {
+      const productId = container.getAttribute('data-product-id');
+      const swatches = container.querySelectorAll('.swatch-input input');
+      swatches.forEach(function (swatch) {
+        swatch.addEventListener('change', function () {
+          if (!this.disabled) {
+            // Remove selected class from all swatches in the current container
+            container.querySelectorAll('.swatch-input input').forEach(function (input) {
+              input.checked = false;
+            });
+
+            // Add selected class to clicked swatch
+            this.checked = true;
+          }
+        });
+      });
+    });
+  });
+</script>
