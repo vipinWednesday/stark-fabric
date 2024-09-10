@@ -1,1 +1,106 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"About Us","heading_size":"h0"}},"text":{"type":"text","settings":{"text":"<strong>We cultivate sonic excellence<\/strong>","text_style":"body"}}},"block_order":["heading","text"],"settings":{"image":"shopify:\/\/shop_images\/Whitley_in_Slate.jpg","image_overlay_opacity":20,"image_height":"large","desktop_content_position":"bottom-left","show_text_box":false,"desktop_content_alignment":"left","color_scheme":"scheme-5","image_behavior":"none","mobile_content_alignment":"left","stack_images_on_mobile":false,"show_text_below":false}},"image_with_text":{"type":"static-image-with-text","blocks":{"heading":{"type":"heading","settings":{"heading":"<b>Our Journey<\/b>","heading_size":"h1"}},"text":{"type":"text","settings":{"text":"<p>In 2015, right at the heart of San Francisco's technology boom, Harmony Sound was born. Its founder, Jacob Freeman, was not only an experienced trader but also a passionate audiophile.<\/p>","text_style":"body"}},"button":{"type":"button","settings":{"button_label":"Our History","button_link":"","button_style_secondary":true}}},"block_order":["heading","text","button"],"settings":{"image":"shopify:\/\/shop_images\/about-journey-01.jpg","height":"adapt","desktop_image_width":"medium","layout":"image_first","desktop_content_position":"top","desktop_content_alignment":"left","content_layout":"no-overlap","section_color_scheme":"","color_scheme":"scheme-1","image_behavior":"none","mobile_content_alignment":"left","padding_top":40,"padding_bottom":0}},"rich_text":{"type":"rich-text","blocks":{"icon":{"type":"image","settings":{"image":"shopify:\/\/shop_images\/text_11029027.png"}},"heading":{"type":"heading","settings":{"heading":"<strong>As the founder of Harmony Sound, my goal has always been to merge technology and passion for music into a unique experience. We believe that good sound has the power to touch souls, and we strive to deliver that transcendent audio experience to every corner of the world.<\/strong>","heading_size":"h1"}},"text":{"type":"text","settings":{"text":"<p>— Jacob Freeman, Founder of Harmony Sound<\/p>"}}},"block_order":["icon","heading","text"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":40,"padding_bottom":0}}},"order":["image_banner","image_with_text","rich_text"]}
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": { "heading": "About Us", "heading_size": "h0" }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>We cultivate sonic excellence</strong>",
+            "text_style": "body"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "image": "shopify://shop_images/Whitley_in_Slate.jpg",
+        "image_overlay_opacity": 20,
+        "image_height": "large",
+        "desktop_content_position": "bottom-left",
+        "show_text_box": false,
+        "desktop_content_alignment": "left",
+        "color_scheme": "scheme-5",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "image_with_text": {
+      "type": "static-image-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": { "heading": "<b>Our Journey</b>", "heading_size": "h1" }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>In 2015, right at the heart of San Francisco's technology boom, Harmony Sound was born. Its founder, Jacob Freeman, was not only an experienced trader but also a passionate audiophile.</p>",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our History",
+            "button_link": "",
+            "button_style_secondary": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image": "shopify://shop_images/about-journey-01.jpg",
+        "height": "adapt",
+        "desktop_image_width": "medium",
+        "layout": "image_first",
+        "desktop_content_position": "top",
+        "desktop_content_alignment": "left",
+        "content_layout": "no-overlap",
+        "section_color_scheme": "",
+        "color_scheme": "scheme-1",
+        "image_behavior": "none",
+        "mobile_content_alignment": "left",
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "icon": {
+          "type": "image",
+          "settings": { "image": "shopify://shop_images/text_11029027.png" }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>As the founder of Harmony Sound, my goal has always been to merge technology and passion for music into a unique experience. We believe that good sound has the power to touch souls, and we strive to deliver that transcendent audio experience to every corner of the world.</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>— Jacob Freeman, Founder of Harmony Sound</p>"
+          }
+        }
+      },
+      "block_order": ["icon", "heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": ["image_banner", "image_with_text", "rich_text"]
+}

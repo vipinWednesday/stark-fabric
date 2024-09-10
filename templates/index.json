@@ -1,1 +1,300 @@
-{"sections":{"image_banner":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"<strong>WOW FACTOR<\/strong>","heading_size":"h0"}},"text":{"type":"text","settings":{"text":"MODERN FORMS MEET TIMELESS MATERIALS","text_style":"body"}},"button":{"type":"buttons","settings":{"button_label_1":"SHOP NEW ARRIVALS","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"SHOP FURNITURE","button_link_2":"shopify:\/\/collections\/all","button_style_secondary_2":true}}},"block_order":["heading","text","button"],"settings":{"image":"shopify:\/\/shop_images\/03-Uptown-Dodson-scaled.jpg","image_overlay_opacity":30,"image_height":"adapt","desktop_content_position":"top-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-5","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"rich_text":{"type":"rich-text","blocks":{"heading":{"type":"heading","settings":{"heading":"<b>THE THRILL OF DISCOVERY<\/b>","heading_size":"h1"}},"text":{"type":"text","settings":{"text":"<p>FIND SOMETHING YOU CAN'T LIVE WITHOUT<\/p>"}}},"block_order":["heading","text"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":40,"padding_bottom":0}},"featured_collections":{"type":"collections-list","settings":{"title":"","collections":["bedroom","dining-room","living-room","office"],"heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"all","products_to_show":8,"columns_desktop":4,"full_width":true,"show_view_all":false,"view_all_style":"solid","enable_desktop_slider":true,"color_scheme":"scheme-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":true,"padding_top":28,"padding_bottom":36}},"image_banner-2":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"WELCOME TO THE REGISTRY","heading_size":"h0"}},"text":{"type":"text","settings":{"text":"FOR GIFTS LESS ORDINARY AND PERKS GALORE","text_style":"body"}},"button":{"type":"buttons","settings":{"button_label_1":"GET STARTED","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":true}}},"block_order":["heading","text","button"],"settings":{"image":"shopify:\/\/shop_images\/Photo_by_Nick_Johnson_Elnora_in_Ecru.jpg","image_overlay_opacity":40,"image_height":"large","desktop_content_position":"middle-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-4","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"rich_text-2":{"type":"rich-text","blocks":{"heading":{"type":"heading","settings":{"heading":"<strong>KEEP FOREVER QUALITY<\/strong>","heading_size":"h1"}},"text":{"type":"text","settings":{"text":"<p>WELL MADE IS ALWAYS WORTH IT<\/p>"}}},"block_order":["heading","text"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"scheme-1","full_width":true,"padding_top":40,"padding_bottom":40}},"image_banner-3":{"type":"image-banner","blocks":{"heading":{"type":"heading","settings":{"heading":"\"EVERY PIECE IS A MIC DROP\"","heading_size":"h0"}},"text":{"type":"text","settings":{"text":"BRINGING A HISTORIC BROWNSTONE INTO 2024","text_style":"body"}},"button":{"type":"buttons","settings":{"button_label_1":"SHOP BEST OF COLLECTION","button_link_1":"shopify:\/\/collections\/all","button_style_secondary_1":true,"button_label_2":"","button_link_2":"","button_style_secondary_2":true}}},"block_order":["heading","text","button"],"settings":{"image":"shopify:\/\/shop_images\/Whitley_in_Slate.jpg","image_overlay_opacity":40,"image_height":"large","desktop_content_position":"middle-center","show_text_box":false,"desktop_content_alignment":"center","color_scheme":"scheme-4","image_behavior":"none","mobile_content_alignment":"center","stack_images_on_mobile":false,"show_text_below":false}},"rich_text_WJMtwR":{"type":"rich-text","blocks":{"heading_kyMWV6":{"type":"heading","settings":{"heading":"MORE TO DISCOVER","heading_size":"h2"}}},"block_order":["heading_kyMWV6"],"settings":{"desktop_content_position":"center","content_alignment":"center","color_scheme":"","full_width":true,"padding_top":40,"padding_bottom":0}},"featured_collections-2":{"type":"collections-list","settings":{"title":"","collections":["bedroom","dining-room","living-room","office"],"heading_size":"h2","description":"","show_description":false,"description_style":"body","collection":"all","products_to_show":8,"columns_desktop":4,"full_width":true,"show_view_all":false,"view_all_style":"solid","enable_desktop_slider":true,"color_scheme":"scheme-1","image_ratio":"portrait","image_shape":"default","show_secondary_image":true,"show_vendor":false,"show_rating":false,"quick_add":"none","columns_mobile":"2","swipe_on_mobile":true,"padding_top":0,"padding_bottom":36}},"rich_text-3":{"type":"rich-text","blocks":{"heading":{"type":"heading","settings":{"heading":"<b>WHAT IS RUGSTORE.COM?<\/b>","heading_size":"h4"}},"text":{"type":"text","settings":{"text":"<p>Discover the perfect rug for any space at our rug store, where quality meets style. Explore a wide range of shapes, sizes, and designs to match your decor. Customize your selection with dynamic dimensions tailored to your needs. Transform your home with our beautiful, high-quality rugs.<\/p>"}}},"block_order":["heading","text"],"settings":{"desktop_content_position":"left","content_alignment":"left","color_scheme":"scheme-1","full_width":true,"padding_top":40,"padding_bottom":0}}},"order":["image_banner","rich_text","featured_collections","image_banner-2","rich_text-2","image_banner-3","rich_text_WJMtwR","featured_collections-2","rich_text-3"]}
+{
+  "sections": {
+    "image_banner": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>WOW FACTOR</strong>",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "MODERN FORMS MEET TIMELESS MATERIALS",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "SHOP NEW ARRIVALS",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "SHOP FURNITURE",
+            "button_link_2": "shopify://collections/all",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image": "shopify://shop_images/03-Uptown-Dodson-scaled.jpg",
+        "image_overlay_opacity": 30,
+        "image_height": "adapt",
+        "desktop_content_position": "top-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-5",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "rich_text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>THE THRILL OF DISCOVERY</b>",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": { "text": "<p>FIND SOMETHING YOU CAN'T LIVE WITHOUT</p>" }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collections": {
+      "type": "collections-list",
+      "settings": {
+        "title": "",
+        "collections": ["bedroom", "dining-room", "living-room", "office"],
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": true,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 28,
+        "padding_bottom": 36
+      }
+    },
+    "image_banner-2": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "WELCOME TO THE REGISTRY",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "FOR GIFTS LESS ORDINARY AND PERKS GALORE",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "GET STARTED",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image": "shopify://shop_images/Photo_by_Nick_Johnson_Elnora_in_Ecru.jpg",
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "rich_text-2": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>KEEP FOREVER QUALITY</strong>",
+            "heading_size": "h1"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": { "text": "<p>WELL MADE IS ALWAYS WORTH IT</p>" }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
+    "image_banner-3": {
+      "type": "image-banner",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "\"EVERY PIECE IS A MIC DROP\"",
+            "heading_size": "h0"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "BRINGING A HISTORIC BROWNSTONE INTO 2024",
+            "text_style": "body"
+          }
+        },
+        "button": {
+          "type": "buttons",
+          "settings": {
+            "button_label_1": "SHOP BEST OF COLLECTION",
+            "button_link_1": "shopify://collections/all",
+            "button_style_secondary_1": true,
+            "button_label_2": "",
+            "button_link_2": "",
+            "button_style_secondary_2": true
+          }
+        }
+      },
+      "block_order": ["heading", "text", "button"],
+      "settings": {
+        "image": "shopify://shop_images/Whitley_in_Slate.jpg",
+        "image_overlay_opacity": 40,
+        "image_height": "large",
+        "desktop_content_position": "middle-center",
+        "show_text_box": false,
+        "desktop_content_alignment": "center",
+        "color_scheme": "scheme-4",
+        "image_behavior": "none",
+        "mobile_content_alignment": "center",
+        "stack_images_on_mobile": false,
+        "show_text_below": false
+      }
+    },
+    "rich_text_WJMtwR": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_kyMWV6": {
+          "type": "heading",
+          "settings": { "heading": "MORE TO DISCOVER", "heading_size": "h2" }
+        }
+      },
+      "block_order": ["heading_kyMWV6"],
+      "settings": {
+        "desktop_content_position": "center",
+        "content_alignment": "center",
+        "color_scheme": "",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    },
+    "featured_collections-2": {
+      "type": "collections-list",
+      "settings": {
+        "title": "",
+        "collections": ["bedroom", "dining-room", "living-room", "office"],
+        "heading_size": "h2",
+        "description": "",
+        "show_description": false,
+        "description_style": "body",
+        "collection": "all",
+        "products_to_show": 8,
+        "columns_desktop": 4,
+        "full_width": true,
+        "show_view_all": false,
+        "view_all_style": "solid",
+        "enable_desktop_slider": true,
+        "color_scheme": "scheme-1",
+        "image_ratio": "portrait",
+        "image_shape": "default",
+        "show_secondary_image": true,
+        "show_vendor": false,
+        "show_rating": false,
+        "quick_add": "none",
+        "columns_mobile": "2",
+        "swipe_on_mobile": true,
+        "padding_top": 0,
+        "padding_bottom": 36
+      }
+    },
+    "rich_text-3": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "<b>WHAT IS RUGSTORE.COM?</b>",
+            "heading_size": "h4"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Discover the perfect rug for any space at our rug store, where quality meets style. Explore a wide range of shapes, sizes, and designs to match your decor. Customize your selection with dynamic dimensions tailored to your needs. Transform your home with our beautiful, high-quality rugs.</p>"
+          }
+        }
+      },
+      "block_order": ["heading", "text"],
+      "settings": {
+        "desktop_content_position": "left",
+        "content_alignment": "left",
+        "color_scheme": "scheme-1",
+        "full_width": true,
+        "padding_top": 40,
+        "padding_bottom": 0
+      }
+    }
+  },
+  "order": [
+    "image_banner",
+    "rich_text",
+    "featured_collections",
+    "image_banner-2",
+    "rich_text-2",
+    "image_banner-3",
+    "rich_text_WJMtwR",
+    "featured_collections-2",
+    "rich_text-3"
+  ]
+}
