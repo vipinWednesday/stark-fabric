@@ -1,6 +1,6 @@
 <product-info
   id="MainProduct-{{ section.id }}"
-  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }}"
+  class="section-{{ section.id }}-padding gradient color-{{ section.settings.color_scheme }} product-info"
   data-section="{{ section.id }}"
   data-product-id="{{ product.id }}"
   data-update-url="true"
@@ -107,7 +107,7 @@
                 </div>
               {%- when 'price' -%}
                 <div id="price-{{ section.id }}" role="status" {{ block.shopify_attributes }}>
-                  {%- render 'price',
+                {%- render 'price',
                     product: product,
                     use_variant: true,
                     show_badges: true,
@@ -133,14 +133,6 @@
                     {%- endif -%}
                   </div>
                 {%- endif -%}
-                <input
-                  type="hidden"
-                  id="line-item-addon-price"
-                  value="30"
-                  name="properties[Price]"
-                  form="{{product_form_id}}"
-                >
-
               {%- when 'inventory' -%}
                 <p
                   class="product__inventory{% if block.settings.text_style == 'uppercase' %} caption-with-letter-spacing{% elsif block.settings.text_style == 'subtitle' %} subtitle{% endif %}{% if product.selected_or_first_available_variant.inventory_management != 'shopify' %} visibility-hidden{% endif %}"
@@ -717,6 +709,18 @@
     </script>
   </div>
 </product-info>
+
+<style>
+  .product-info{
+    font-family: "Assistant", sans-serif;
+  }
+  .accordion__title {
+    font-family: "Assistant",sans-serif !important;
+  }
+  .inline-richtext{
+    font-family: "Assistant",sans-serif;
+  }
+</style>
 
 
 {% schema %}

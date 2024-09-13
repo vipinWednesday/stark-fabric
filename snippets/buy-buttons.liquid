@@ -61,7 +61,7 @@
           %}
             disabled
           {% endif %}
-          class="product-variant-id"
+          class="product-variant-id form-data-variant-id"
         >
 
         {%- if gift_card_recipient_feature_active -%}
@@ -80,15 +80,54 @@
           -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
-            type="submit"
+            type="button"
             name="add"
-            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} middleware-btn"
             {% if product.selected_or_first_available_variant.available == false
               or quantity_rule_soldout
               or product.selected_or_first_available_variant == nil
             %}
               disabled
             {% endif %}
+            
+          >
+            <span class="btn-text">
+              <div>
+              {%- if product.selected_or_first_available_variant == nil -%}
+                {{ 'products.product.unavailable' | t }}
+              {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+                {{ 'products.product.sold_out' | t }}
+              {%- else -%}
+                {{ 'products.product.add_to_cart' | t }}
+              {%- endif -%}
+              </div>
+              <div class="loading__spinner hidden">
+             <svg
+    aria-hidden="true"
+    focusable="false"
+    class="spinner"
+    viewBox="0 0 66 66"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <circle class="path" fill="none" stroke-width="6" cx="33" cy="33" r="30"></circle>
+  </svg>
+</div>
+
+            </span>
+            
+          </button>
+          <button
+            id="ProductSubmitButton-{{ section_id }}"
+            type="submit"
+            name="add"
+            class="product-form__submit button button--full-width hidden action-btn {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %}"
+            {% if product.selected_or_first_available_variant.available == false
+              or quantity_rule_soldout
+              or product.selected_or_first_available_variant == nil
+            %}
+              disabled
+            {% endif %}
+             
           >
             <span>
               {%- if product.selected_or_first_available_variant == nil -%}
@@ -99,11 +138,11 @@
                 {{ 'products.product.add_to_cart' | t }}
               {%- endif -%}
             </span>
-            {%- render 'loading-spinner' -%}
+          
           </button>
-          {%- if show_dynamic_checkout -%}
+          {% comment %} {%- if show_dynamic_checkout -%}
             {{ form | payment_button }}
-          {%- endif -%}
+          {%- endif -%} {% endcomment %}
         </div>
       {%- endform -%}
     </product-form>
@@ -155,3 +194,145 @@
     <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 </div>
+
+<style>
+  .btn-text{
+    display:block;
+    display: flex;
+    width:100%;
+    justify-content: center;
+    gap:1rem;
+  }
+
+  .loading__spinner {
+    position: relative;
+    z-index: 1;
+    width: 1.8rem;
+  }
+</style>
+
+  <script>
+  let middlewareBtn = document.querySelector(".middleware-btn");
+  middlewareBtn.addEventListener('click', (event) => {
+  event.preventDefault(); // Prevent default form submission
+
+  // Access the loading spinner div
+  const loadingSpinner = middlewareBtn.querySelector('.loading__spinner');
+
+  // Show the spinner
+  if (loadingSpinner) {
+    loadingSpinner.classList.remove('hidden');
+    console.log(loadingSpinner);
+  }
+
+  // Remove the <span> inside the button
+ 
+
+  // Get product details and handle response
+  getProductDetails()
+    .then(() => {
+      // Hide the spinner after completing the request
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Hide the spinner in case of an error as well
+      if (loadingSpinner) {
+        loadingSpinner.classList.add('hidden');
+      }
+    });
+});
+
+function getProductDetails() {
+  return new Promise((resolve, reject) => {
+    // Get values from input elements
+    const variantId = document.querySelector('.form-data-variant-id').value;
+
+    // Get values from select elements
+    const diameterSelect = document.getElementById('DiameterSelect');
+    const diameterInchSelect = document.getElementById('DiameterInchSelect');
+    const lengthSelect = document.getElementById('LengthSelect');
+    const lengthInchSelect = document.getElementById('LengthInchSelect');
+    const widthSelect = document.getElementById('WidthSelect');
+    const widthInchSelect = document.getElementById('WidthInchSelect');
+    const selectedVariantIdInput = document.getElementById('selected-variant-id');
+
+    // Get shape input value
+    const shapeInput = document.querySelector('input[name="properties[Shape]"]:checked').value.toUpperCase();
+  
+    // Convert dimension values to integers
+    const diameterFeet = parseInt(diameterSelect.value, 10);
+    const diameterInches = parseInt(diameterInchSelect.value, 10);
+    const lengthFeet = parseInt(lengthSelect.value, 10);
+    const lengthInches = parseInt(lengthInchSelect.value, 10);
+    const widthFeet = parseInt(widthSelect.value, 10);
+    const widthInches = parseInt(widthInchSelect.value, 10);
+
+    let dimensions = {};
+    // Payload for POST request
+    if (shapeInput === "ROUND") {
+      dimensions = {
+        diameter_feet: diameterFeet,
+        diameter_inches: diameterInches,
+      };
+    } else if (shapeInput === "RECTANGULAR") {
+      dimensions = {
+        length_feet: lengthFeet,
+        length_inches: lengthInches,
+        width_feet: widthFeet,
+        width_inches: widthInches
+      };
+    }
+
+    const payload = {
+      baseVariantId: `gid://shopify/ProductVariant/${variantId}`,
+      shape: shapeInput,
+      dimensions: dimensions
+    };
+
+    // Make POST request
+    fetch('http://localhost:3000/products', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    })
+    .then(response => response.json())
+    .then(data => {
+      handleResponse(data);
+      resolve(); // Resolve the promise on successful completion
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      reject(error); // Reject the promise if there's an error
+    });
+  });
+}
+
+function handleResponse(response) {
+  // Extract product and variant IDs from the response
+  const productId = response.id.split('/').pop(); // Extract product ID
+  const variantId = response.variants.nodes[0].id.split('/').pop(); // Extract variant ID
+
+  // Set the value of the input with name "product-id"
+  const productIdInput = document.querySelector('input[name="product-id"]');
+  if (productIdInput) {
+    productIdInput.value = productId;
+  }
+
+  // Set the value of the input with class "form-data-variant-id"
+  const variantIdInput = document.querySelector('.form-data-variant-id');
+  if (variantIdInput) {
+    variantIdInput.value = variantId;
+  }
+
+  const actionButton = document.querySelector('.action-btn');
+  
+  setTimeout(() => {
+    if (actionButton) {
+      actionButton.click(); // Simulate a click event on the button
+    }
+  }, 2000);
+}
+
+  </script>

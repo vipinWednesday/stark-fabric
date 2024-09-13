@@ -47,16 +47,19 @@
       <label for="DiameterSelect" class="form-label">Diameter</label>
       <div class="flex-row">
         <div class="dimension-input">
-          
+          <div class="select-wrapper">
           <select id="DiameterSelect" name="diameter" class="form-select">
           </select>
+          </div>
         </div>
         <div class="dimension-input">
-          <select id="DiameterInchSelect" name="diameter-inch" class="form-select">
+          <div class="select-wrapper">
+          <select id="DiameterInchSelect" name="diameter-inch" class="form-select">            
             {% for i in (0..11) %}
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+          </div>
         </div>
       </div>
     </div>
@@ -67,30 +70,38 @@
       <label for="LengthSelect" class="form-label">Length</label>
       <div class="flex-row">
         <div class="dimension-input">
+          <div class="select-wrapper">
           <select id="LengthSelect" name="length" class="form-select">
           </select>
+          </div>
         </div>
         <div class="dimension-input">
+          <div class="select-wrapper">
           <select id="LengthInchSelect" name="length-inch" class="form-select">
             {% for i in (0..11) %}
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+          </div>
         </div>
       </div>
 
       <label for="WidthSelect" class="form-label">Width</label>
       <div class="flex-row">
         <div class="dimension-input">
+          <div class="select-wrapper">
           <select id="WidthSelect" name="width" class="form-select">
           </select>
+          </div>
         </div>
         <div class="dimension-input">
+          <div class="select-wrapper">
           <select id="WidthInchSelect" name="width-inch" class="form-select">
             {% for i in (0..11) %}
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+          </div>
         </div>
       </div>
     </div>
@@ -103,21 +114,25 @@
     <input type="hidden" name="properties[Diameter ft]" id="line-item-dimension-diameter-feet" form="{{product_form_id}}">
     <input type="hidden" name="properties[Diameter inch]" id="line-item-dimension-diameter-inch" form="{{product_form_id}}">
 </div>
-
-<script>
+<script src="{{ 'currency-divisor.js' | asset_url }}" defer></script>
+<script>  
   document.addEventListener('DOMContentLoaded', function () {
     var variantMetafields = {};
-    
+    var currency = "{{shop.currency}}"; // get the currency
+    var currencySymbol = "{{ 25 | money | slice: 0, 1 }}" // get the symbol
+    var divisor = currencyDivisors[currency] || 100; // calculating for per divisor
+    var selectedVariantPrice;
+
     {% for variant in product.variants %}
       variantMetafields["{{ variant.id }}"] = {
+        price:{{ variant.price }},
         max_diameter: {{ variant.metafields.custom.max_diameter.value | default: '0.0' }},
         max_length: {{ variant.metafields.custom.max_length.value | default: '0.0' }},
         max_width: {{ variant.metafields.custom.max_width.value | default: '0.0' }}
+        
       };
     {% endfor %}
 
-
-    const pricePerUnit = parseFloat('{{ product.metafields.custom.price_per_unit | default: "10.0" }}');
     const unit = '{{ product.metafields.custom.dimension_unit | default: "ft" }}';
 
     const diameterSelect = document.getElementById('DiameterSelect');
@@ -136,6 +151,7 @@
 
     // Function to update the options in a select element
     function updateSelectOptions(selectElement, maxValue) {
+      let defaultFeet = 5;  
       selectElement.innerHTML = '';
       if(maxValue == 0){
          let option = document.createElement('option');
@@ -147,17 +163,34 @@
       for (let i = 1; i <= maxValue; i++) {
         let option = document.createElement('option');
         option.value = i;
-        option.textContent = `${i} ${unit}`;
+        option.textContent = `${i} ${unit}`;  
+        if(defaultFeet == i){
+          option.selected = true;
+        }else if(defaultFeet > maxValue && i == maxValue){
+          option.selected = true;
+        }
         selectElement.appendChild(option);
-      }
+        
+      } 
   }
+   setTimeout(()=>{
+        updatePrice();
+      },0)
   }
     
 
     // Function to update shape details based on the selected variant
     function updateShapeDetails() {
       const selectedVariantId = selectedVariantIdInput.value;
+      console.log(selectedVariantId);
       const selectedVariant = variantMetafields[selectedVariantId] || {};
+      selectedVariantPrice = selectedVariant.price;
+      console.log(selectedVariantPrice);
+      
+      diameterInchSelect.selectedIndex = 0;
+      lengthInchSelect.selectedIndex = 0;
+      widthInchSelect.selectedIndex = 0;
+
 
         if(selectedVariant.max_diameter){
         diameterSelect.disabled = false;
@@ -165,7 +198,7 @@
         updateSelectOptions(diameterSelect, selectedVariant.max_diameter);
         }else {
         diameterSelect.disabled = true;
-        diameterInchSelect.disabled = true; 
+        diameterInchSelect.disabled = true;  
         updateSelectOptions(diameterSelect, 0);
         }
         if(selectedVariant.max_length){
@@ -226,8 +259,7 @@
 
         const totalDiameter = diameter + diameterInches / 12;
         if (totalDiameter) {
-          const radius = totalDiameter / 2;
-          area = Math.PI * Math.pow(radius, 2);
+          area = totalDiameter * totalDiameter;
         }
 
       } else if (shape === 'Rectangular') {
@@ -249,12 +281,15 @@
           area = totalLength * totalWidth;
         }
       }
-
-      const price = (area * pricePerUnit).toFixed(2);
+      console.log("@@@@",area);
+      if(area > 0){
+      const price = (area * selectedVariantPrice / divisor).toFixed(2);
+      const formattedPrice = ` ${currencySymbol} ${price} ${currency}`;
       const priceItem = document.querySelector('.price-item');
       if (priceItem) {
-        priceItem.textContent = `$${price} USD`;
+        priceItem.innerHTML = formattedPrice;
       }
+  }
     }
 
     // Shape pill click handler
@@ -274,8 +309,8 @@
         } else if (pill.querySelector('input').value === 'Rectangular') {
           document.getElementById('RectangularDetails').style.display = 'block';
         }
-
-        updatePrice();
+        diameterInchSelect.selectedIndex = 0;
+        updateShapeDetails()
       });
     });
 
@@ -301,6 +336,10 @@
     margin-bottom: 15px;
     font-weight: bold;
   }
+  .picker-header{
+    font-size: 1.7rem;
+    font-family: "Assistant",sans-serif;
+  }
   .shape-picker {
     display: flex;
     gap: 0.5rem;
@@ -316,6 +355,7 @@
     font-size: 1.2rem;
     font-weight: bold;
     gap:0.8rem;
+    font-family: "Assistant",sans-serif;
   }
   .shape-pill.checked {
     background-color: #000;
@@ -350,6 +390,8 @@
   font-weight: bold;
   margin-bottom: 5px;
   display: block;
+  font-size:1.3rem;
+  font-family: "Assistant",sans-serif;
 }
 
 .form-label-sm {
@@ -359,15 +401,41 @@
   text-align: center;
 }
 
-.form-select {
-  padding: 5px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  flex: 1;
+
+
+
+
+
+/* Additional styles to handle padding and appearance */
+
+
+select { /* Adjust padding to fit your design */
+  border: none !important;
+  font-size: 16px;
+  background-color: #fff;
+  outline:0;
+  margin:0 !important;
+  /* Maintain default appearance */
+  appearance: auto; /* Keeps the native arrow visible */
+  box-shadow: none !important;
+  
 }
 
-.picker-header{
-  
+select:focus{
+  outline-width: 0 !important;
+  outline:0 !important;
+  border:none !important; 
+}
+
+/* Additional styles for the select wrapper if needed */
+.select-wrapper {
+  border-radius: 4px;
+  padding: 0px 12px;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #ccc
 }
 
 

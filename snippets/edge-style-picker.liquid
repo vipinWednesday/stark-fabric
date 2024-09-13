@@ -5,6 +5,7 @@
 
 <div class="edge-style-container">
   <h5 class="picker-header">Edge Style</h5>
+  <div class="select-wrapper">
   <select id="EdgeStyleSelect" name="properties[Edge style]" class="edge-style-select" form="{{product_form_id}}">
     {% if product.metafields.custom.edge_style %}
       {% assign edge_styles = product.metafields.custom.edge_style.value %}
@@ -15,6 +16,7 @@
       <option value="">No edge styles available</option>
     {% endif %}
   </select>
+  </div>
 </div>
 
 <style>
