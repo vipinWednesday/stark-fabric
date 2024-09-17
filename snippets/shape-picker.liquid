@@ -4,12 +4,6 @@
 {% endcomment %}
 
 {% assign shapes = 'Round,Rectangular' | split: ',' %}
-
-
-{{product.var}}
-
-
-
 <div class="option-block">
   <input type="hidden" id="selected-variant-id" value="" >
   <h5 class="picker-header">Shapes</h5>
@@ -24,7 +18,7 @@
       <label class="shape-pill{% if is_disabled %} disabled{% endif %} {% if is_checked %}checked{% endif %}">
         <input
           type="radio"
-          name="properties[Shape]"
+          name="shape"
           value="{{ shape }}"
           class="shape-input"
           {% if is_disabled %} disabled{% endif %}
@@ -44,12 +38,15 @@
   <div class="shape-details-container">
  
     <div id="RoundDetails" class="shape-details" style="display: block;">
-      <label for="DiameterSelect" class="form-label">Diameter</label>
+      <label for="DiameterSelect" class="form-label">DIAMETER</label>
       <div class="flex-row">
         <div class="dimension-input">
           <div class="select-wrapper">
           <select id="DiameterSelect" name="diameter" class="form-select">
           </select>
+           <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
         <div class="dimension-input">
@@ -59,6 +56,9 @@
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+          <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
       </div>
@@ -67,12 +67,15 @@
 
  
     <div id="RectangularDetails" class="shape-details" style="display: none;">
-      <label for="LengthSelect" class="form-label">Length</label>
+      <label for="LengthSelect" class="form-label">LENGTH</label>
       <div class="flex-row">
         <div class="dimension-input">
           <div class="select-wrapper">
           <select id="LengthSelect" name="length" class="form-select">
           </select>
+           <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
         <div class="dimension-input">
@@ -82,16 +85,22 @@
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+           <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
       </div>
 
-      <label for="WidthSelect" class="form-label">Width</label>
+      <label for="WidthSelect" class="form-label">WIDTH</label>
       <div class="flex-row">
         <div class="dimension-input">
           <div class="select-wrapper">
           <select id="WidthSelect" name="width" class="form-select">
           </select>
+           <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
         <div class="dimension-input">
@@ -101,18 +110,15 @@
               <option value="{{ i }}">{{ i }} inch</option>
             {% endfor %}
           </select>
+           <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
           </div>
         </div>
       </div>
     </div>
 
 </div>
-    <input type="hidden" name="properties[Length ft]" id="line-item-dimension-length-feet" form="{{product_form_id}}">
-    <input type="hidden" name="properties[Length inch]" id="line-item-dimension-length-inch" form="{{product_form_id}}">
-    <input type="hidden" name="properties[Width ft]" id="line-item-dimension-width-feet" form="{{product_form_id}}">
-    <input type="hidden" name="properties[Width inch]" id="line-item-dimension-width-inch" form="{{product_form_id}}">
-    <input type="hidden" name="properties[Diameter ft]" id="line-item-dimension-diameter-feet" form="{{product_form_id}}">
-    <input type="hidden" name="properties[Diameter inch]" id="line-item-dimension-diameter-inch" form="{{product_form_id}}">
 </div>
 <script src="{{ 'currency-divisor.js' | asset_url }}" defer></script>
 <script>  
@@ -237,25 +243,11 @@
     // Function to update price based on selected dimensions
     function updatePrice() {
       let area = 0;
-      const shape = document.querySelector('input[name="properties[Shape]"]:checked')?.value;
-
-      const diameterFeetLineItem = document.getElementById('line-item-dimension-diameter-feet');
-      const diameterInchesLineItem = document.getElementById('line-item-dimension-diameter-inch');
-      const lengthFeetLineItem = document.getElementById('line-item-dimension-length-feet');
-      const lengthInchesLineItem = document.getElementById('line-item-dimension-length-inch');
-      const widthFeetLineItem = document.getElementById('line-item-dimension-width-feet');
-      const widthInchesLineItem = document.getElementById('line-item-dimension-width-inch');
+      const shape = document.querySelector('input[name="shape"]:checked')?.value;
 
       if (shape === 'Round') {
         const diameter = parseFloat(diameterSelect.value);
         const diameterInches = parseFloat(diameterInchSelect.value);
-
-        diameterFeetLineItem.value = diameter > 0 ? diameter : null;
-        diameterInchesLineItem.value = diameterInches > 0 ? diameterInches : null;
-        lengthFeetLineItem.value = null;
-        lengthInchesLineItem.value = null;
-        widthFeetLineItem.value = null;
-        widthInchesLineItem.value = null;
 
         const totalDiameter = diameter + diameterInches / 12;
         if (totalDiameter) {
@@ -268,20 +260,12 @@
         const width = parseFloat(widthSelect.value);
         const widthInches = parseFloat(widthInchSelect.value);
 
-        lengthFeetLineItem.value = length > 0 ? length : null;
-        lengthInchesLineItem.value = lengthInches > 0 ? lengthInches : null;
-        widthFeetLineItem.value = width > 0 ? width : null;
-        widthInchesLineItem.value = widthInches > 0 ? widthInches : null;
-        diameterFeetLineItem.value = null;
-        diameterInchesLineItem.value = null;
-
         const totalLength = length + lengthInches / 12;
         const totalWidth = width + widthInches / 12;
         if (totalLength && totalWidth) {
           area = totalLength * totalWidth;
         }
       }
-      console.log("@@@@",area);
       if(area > 0){
       const price = (area * selectedVariantPrice / divisor).toFixed(2);
       const formattedPrice = ` ${currencySymbol} ${price} ${currency}`;
@@ -382,6 +366,7 @@
 }
 
 .dimension-input {
+  flex:1;
   display: flex;
   flex-direction: column;
 }
@@ -412,30 +397,54 @@
 select { /* Adjust padding to fit your design */
   border: none !important;
   font-size: 16px;
-  background-color: #fff;
+  background: inherit;
   outline:0;
   margin:0 !important;
   /* Maintain default appearance */
-  appearance: auto; /* Keeps the native arrow visible */
+  appearance: none; /* Keeps the native arrow visible */
   box-shadow: none !important;
+ background-color: #fbfafa !important;
   
 }
 
 select:focus{
-  outline-width: 0 !important;
-  outline:0 !important;
   border:none !important; 
 }
 
 /* Additional styles for the select wrapper if needed */
 .select-wrapper {
-  border-radius: 4px;
-  padding: 0px 12px;
+  padding: 5px 20px;
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  border: 1px solid #ccc
+  background-color: #fbfafa !important;
+  border-bottom: 1.2px solid #000;
+  box-shadow: 0.5px 0.5px 2px #eeeeee;
+}
+
+.select-wrapper::after {
+  content: ""; /* Custom double arrow symbols */
+  font-size: 12px;
+  position: absolute;
+  right: 10px; /* Adjust based on your design */
+  color: #000; /* Arrow color */
+  pointer-events: none; /* Prevent interaction */
+}
+
+.custom-arrow {
+  position: absolute;
+  right: 10px;
+  pointer-events: none; /* Prevent interaction */
+  display: flex;
+  align-items: center;
+}
+
+/* Style for SVG if needed */
+.custom-arrow svg {
+  width: 8px;
+  height: 14px;
+  fill: #000; /* Set the color of the SVG */
 }
 
 

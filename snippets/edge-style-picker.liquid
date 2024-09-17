@@ -2,10 +2,19 @@
   Edge Style Picker Snippet
   This snippet adds a dropdown for selecting edge styles, populated from the product's metafield.
 {% endcomment %}
-
-<div class="edge-style-container">
-  <h5 class="picker-header">Edge Style</h5>
-  <div class="select-wrapper">
+<div class="product__accordion accordion quick-add-hidden edge-style-accrodian">
+                  <details id="Details">
+                    <summary>
+                      <div class="summary__title">
+                        {% render 'icon-accordion', icon: block.settings.icon %}
+                        <h2 class="h4 accordion__title inline-richtext picker-header">
+                         Edge Style
+                        </h2>
+                      </div>
+                      {% render 'icon-caret' %}
+                    </summary>
+                    <div class="accordion__content rte" id="ProductAccordion">
+                      <div class="select-wrapper">
   <select id="EdgeStyleSelect" name="properties[Edge style]" class="edge-style-select" form="{{product_form_id}}">
     {% if product.metafields.custom.edge_style %}
       {% assign edge_styles = product.metafields.custom.edge_style.value %}
@@ -16,8 +25,14 @@
       <option value="">No edge styles available</option>
     {% endif %}
   </select>
+   <div class="custom-arrow">
+           {% render 'double-arrow' %}
+          </div>
   </div>
-</div>
+                    </div>
+                  </details>
+                </div>
+
 
 <style>
   /* Edge Style Container */
@@ -58,6 +73,10 @@
     border-color: #007ace; /* Shopify Dawn theme blue on focus */
     outline: none;
     box-shadow: 0 0 0 2px rgba(0, 122, 206, 0.2);
+  }
+
+  .edge-style-accrodian{
+    border-bottom: none !important;
   }
 </style>
 

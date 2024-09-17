@@ -80,7 +80,7 @@
           -%}
           <button
             id="ProductSubmitButton-{{ section_id }}"
-            type="button"
+            type="submit"
             name="add"
             class="product-form__submit button button--full-width {% if show_dynamic_checkout %}button--secondary{% else %}button--primary{% endif %} middleware-btn"
             {% if product.selected_or_first_available_variant.available == false
@@ -211,6 +211,7 @@
   }
 </style>
 
+
   <script>
   let middlewareBtn = document.querySelector(".middleware-btn");
   middlewareBtn.addEventListener('click', (event) => {
@@ -246,6 +247,8 @@ function getProductDetails() {
   return new Promise((resolve, reject) => {
     // Get values from input elements
     const variantId = document.querySelector('.form-data-variant-id').value;
+    
+    const shopId = "gid://shopify/Shop/{{shop.id}}";
 
     // Get values from select elements
     const diameterSelect = document.getElementById('DiameterSelect');
@@ -257,7 +260,7 @@ function getProductDetails() {
     const selectedVariantIdInput = document.getElementById('selected-variant-id');
 
     // Get shape input value
-    const shapeInput = document.querySelector('input[name="properties[Shape]"]:checked').value.toUpperCase();
+    const shapeInput = document.querySelector('input[name="shape"]:checked').value.toUpperCase();
   
     // Convert dimension values to integers
     const diameterFeet = parseInt(diameterSelect.value, 10);
@@ -286,7 +289,8 @@ function getProductDetails() {
     const payload = {
       baseVariantId: `gid://shopify/ProductVariant/${variantId}`,
       shape: shapeInput,
-      dimensions: dimensions
+      dimensions: dimensions,
+      shopId:shopId
     };
 
     // Make POST request

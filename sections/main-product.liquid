@@ -52,6 +52,8 @@
   {%- if request.design_mode -%}
     <script src="{{ 'theme-editor.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
+  
+{% assign base_url = product.url | split: '?' | first | prepend: request.origin %}
 
   {%- assign first_3d_model = product.media | where: 'media_type', 'model' | first -%}
   {%- if first_3d_model -%}
@@ -428,6 +430,7 @@
                     </volume-pricing>
                   {%- endif -%}
                 </div>
+               <input type="hidden" name="properties[parenturl]" id="line-item-parent-url" form="{{product_form_id}}" value="{{base_url}}">
               {%- when 'popup' -%}
                 <modal-opener
                   class="product-popup-modal__opener quick-add-hidden"
