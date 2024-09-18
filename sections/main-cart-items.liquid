@@ -80,7 +80,7 @@
               <tbody>
                 {%- for item in cart.items -%}
                                       {% for property in item.properties %}
-  {% if property.first == 'parenturl' %}
+  {% if property.first == '_parenturl' %}
     {% assign parent_url = property.last %}
   {% endif %}
 {% endfor %}
@@ -156,7 +156,7 @@
                             {%- assign property_first_char = property.first | slice: 0 -%}
                             {%- if property.last != blank and property_first_char != '_' -%}
                               <div class="product-option">
-                                {%- if property.first != "parenturl" -%}
+                                {%- if property.first != "_parenturl" -%}
                                 <dt>{{ property.first }}:</dt>
                                 <dd>
                                   {%- if property.last contains '/uploads/' -%}
