@@ -21,7 +21,7 @@
   >
     {%- for option in product.options_with_values -%}
       {%- if option.name == 'Color' -%}
-        <fieldset class="js product-form__input product-form__input--swatch">
+        <fieldset class="js product-form__input product-form__input--swatch swatch-options">
           <legend class="form__label">
             {{ option.name }}:
             <span data-selected-value>
@@ -41,10 +41,12 @@
 
 <style>
   /* Ensure no borders around swatches */
+  .swatch-options{
+    margin : 0 !important;
+  }
   .product-form__input--swatch {
     border: none;
     padding: 0;
-    margin-top: 1rem;
   }
 
   .product-form__input--swatch legend {

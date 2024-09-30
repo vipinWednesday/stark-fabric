@@ -249,6 +249,7 @@ function getProductDetails() {
     const variantId = document.querySelector('.form-data-variant-id').value;
     
     const shopId = "gid://shopify/Shop/{{shop.id}}";
+    const shopName = "{{shop.name}}";
 
     // Get values from select elements
     const diameterSelect = document.getElementById('DiameterSelect');
@@ -290,11 +291,12 @@ function getProductDetails() {
       baseVariantId: `gid://shopify/ProductVariant/${variantId}`,
       shape: shapeInput,
       dimensions: dimensions,
-      shopId:shopId
+      shopId:shopId,
+      shopName:shopName
     };
 
     // Make POST request
-    fetch('http://localhost:3000/products', {
+    fetch('https://fabric-middle.ngrok.app/products', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

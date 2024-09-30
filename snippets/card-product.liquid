@@ -68,6 +68,9 @@
         class="card__inner {% if settings.card_style == 'standard' %}color-{{ settings.card_color_scheme }} gradient{% endif %}{% if card_product.featured_media or settings.card_style == 'standard' %} ratio{% endif %}"
         style="--ratio-percent: {{ 1 | divided_by: ratio | times: 100 }}%;"
       >
+      <div class="color-variant-container">
+      {% render 'product-color-variant', product: card_product, block: block, product_form_id: product_form_id %}
+      </div>
         {%- if card_product.featured_media -%}
             <a
               href="{{ card_product.url }}"
@@ -163,7 +166,7 @@
         </div>
       </div>
       <div class="card__content">
-        {% render 'product-color-variant', product: card_product, block: block, product_form_id: product_form_id %}
+        
         <div class="card__information">
           <h3 class="product-title">
             <a
@@ -637,6 +640,10 @@
   .card__media::before{
     pointer-events: all;
   }
+
+  .product-title{
+    margin-bottom: 0px ;
+  }
   .card__content .custom-variant-selects{
     height:4rem;
   }
@@ -650,7 +657,15 @@
     text-decoration: none;
     color: black;
   }
-
+.color-variant-container{
+  position: absolute;
+  z-index: 2000;
+  background-color: rgba(236, 236, 236, 0.9); 
+  min-height: 0;
+  width: 100%; 
+  padding: 0px 10px;
+  bottom: 0;
+}
   .card-img-link{
    position:absolute;
    top:0;

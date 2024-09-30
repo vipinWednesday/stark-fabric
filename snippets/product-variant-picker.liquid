@@ -28,7 +28,7 @@
         endif
       -%}
       {%- if picker_type == 'swatch' -%}
-        <fieldset class="js product-form__input product-form__input--swatch option-fieldset">
+        <fieldset class="js product-form__input product-form__input--swatch swatch-options option-fieldset">
           <legend class="form__label">
             {{ option.name }}:
             <span data-selected-value>
@@ -91,3 +91,9 @@
     </script>
   </variant-selects>
 {%- endunless -%}
+
+<style>
+  .swatch-options{
+    margin: 0;
+  }
+</style>
