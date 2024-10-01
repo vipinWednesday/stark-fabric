@@ -20,14 +20,12 @@
       <div class="rich-text__blocks {{ section.settings.content_alignment }}">
         {%- for block in section.blocks -%}
           {%- case block.type -%}
-            {%- when 'image' -%}
-              {%- if block.settings.image != blank -%}
+            {%- when 'image' -%}            
                 <img
-                  src="{{ block.settings.image | image_url }}"
+                   src="{% if block.settings.image %}{{ block.settings.image | image_url }}{% else %}{{ 'close-quote.png' | asset_url }}{% endif %}"
                   width="40"
                   height="40"
                 >
-              {%- endif -%}
             {%- when 'heading' -%}
               <h2
                 class="rich-text__heading rte inline-richtext {{ block.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"

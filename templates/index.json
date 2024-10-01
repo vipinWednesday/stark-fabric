@@ -31,9 +31,10 @@
       },
       "block_order": ["heading", "text", "button"],
       "settings": {
-        "image": "shopify://shop_images/03-Uptown-Dodson-scaled.jpg",
+        "image": "",
+        "placeholder_image_url": "03-Uptown-Dodson-scaled.jpg",
         "image_overlay_opacity": 30,
-        "image_height": "adapt",
+        "image_height": "large",
         "desktop_content_position": "top-center",
         "show_text_box": false,
         "desktop_content_alignment": "center",
@@ -74,6 +75,12 @@
       "settings": {
         "title": "",
         "collections": ["bedroom", "dining-room", "living-room", "office"],
+        "placeholder_image_urls": [
+          "collection1.jpg",
+          "collection2.jpg",
+          "collection3.jpg",
+          "collection4.jpg"
+        ],
         "heading_size": "h2",
         "description": "",
         "show_description": false,
@@ -129,7 +136,8 @@
       },
       "block_order": ["heading", "text", "button"],
       "settings": {
-        "image": "shopify://shop_images/Photo_by_Nick_Johnson_Elnora_in_Ecru.jpg",
+        "image": "",
+        "placeholder_image_url": "banner2.jpg",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "desktop_content_position": "middle-center",
@@ -198,7 +206,8 @@
       },
       "block_order": ["heading", "text", "button"],
       "settings": {
-        "image": "shopify://shop_images/Whitley_in_Slate.jpg",
+        "image": "",
+        "placeholder_image_url": "banner3.jpg",
         "image_overlay_opacity": 40,
         "image_height": "large",
         "desktop_content_position": "middle-center",

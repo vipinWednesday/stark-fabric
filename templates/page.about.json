@@ -17,7 +17,8 @@
       },
       "block_order": ["heading", "text"],
       "settings": {
-        "image": "shopify://shop_images/Whitley_in_Slate.jpg",
+        "image": "",
+        "placeholder_image_url": "about_us_placeholder.jpg",
         "image_overlay_opacity": 20,
         "image_height": "large",
         "desktop_content_position": "bottom-left",
@@ -55,7 +56,7 @@
       },
       "block_order": ["heading", "text", "button"],
       "settings": {
-        "image": "shopify://shop_images/about-journey-01.jpg",
+        "image": "",
         "height": "adapt",
         "desktop_image_width": "medium",
         "layout": "image_first",
@@ -75,7 +76,7 @@
       "blocks": {
         "icon": {
           "type": "image",
-          "settings": { "image": "shopify://shop_images/text_11029027.png" }
+          "settings": { "image": "" }
         },
         "heading": {
           "type": "heading",

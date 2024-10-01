@@ -1,4 +1,5 @@
 {{ 'component-image-with-text.css' | asset_url | stylesheet_tag }}
+{% assign placeholder_img = "journey_placeholder.jpg" |  asset_url  %}
 
 {%- style -%}
   .section-{{ section.id }}-padding {
@@ -54,8 +55,8 @@
                 | image_url: width: 1500
                 | image_tag: sizes: sizes, widths: widths, fetchpriority: fetch_priority
               }}
-            {%- else -%}
-              {{ 'detailed-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- else -%} 
+              <img src="{{placeholder_img}}" width="100%" height="100%" style="width: 100%; height: 100%; object-fit: cover;" />
             {%- endif -%}
           </div>
         </div>

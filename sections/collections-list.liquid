@@ -110,7 +110,8 @@
             {% render 'card-collection',
               card_collection: collection,
               media_aspect_ratio: section.settings.image_ratio,
-              columns: 4
+              columns: 4,
+              index:forloop.index0 
             %}
           </li>
           {%- assign skip_card_product_styles = true -%}
@@ -137,6 +138,8 @@
                 card_collection: collection,
                 columns: 4,
                 media_aspect_ratio: section.settings.image_ratio
+                placeholder_image_urls:placeholder_image
+                index:forloop.index0 
               %}
             </li>
           {%- endfor -%}

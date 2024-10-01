@@ -249,7 +249,7 @@ function getProductDetails() {
     const variantId = document.querySelector('.form-data-variant-id').value;
     
     const shopId = "gid://shopify/Shop/{{shop.id}}";
-    const shopName = "{{shop.name}}";
+    const shopName = "{{ shop.name | downcase | replace: ' ', '-' }}";
 
     // Get values from select elements
     const diameterSelect = document.getElementById('DiameterSelect');

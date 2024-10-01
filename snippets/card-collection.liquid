@@ -8,10 +8,15 @@
   - extend_height: {Boolean} Card height extends to available container space. Default: false (optional)
   - wrapper_class: {String} Wrapper class for card (optional)
   - placeholder_image: {String} Placeholder image when collection is empty (optional)
+  - index: {Number} Index for the placeholder image (optional)
 
   Usage:
   {% render 'card-collection' %}
 {% endcomment %}
+
+{%- assign placeholder_image_urls = "collection1.jpeg,collection2.jpg,collection3.jpg,collection4.jpg" | split: "," -%}
+{%- assign static_placeholder_image = placeholder_image_urls[index] | asset_url -%}
+
 
 {%- liquid
   assign ratio = 1
@@ -78,7 +83,7 @@
       {%- endif -%}
       {%- if card_collection == blank -%}
         <div class="card__media">
-          {{ 'hero-apparel-1' | placeholder_svg_tag: 'placeholder-svg' }}
+          <img src="{{static_placeholder_image}}" width="100%" height="100%" />
         </div>
       {%- else -%}
         <div class="card__content">
