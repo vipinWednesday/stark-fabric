@@ -454,7 +454,7 @@
               {%- when 'variant_picker' -%}
                 {% render 'product-variant-picker', product: product, block: block, product_form_id: product_form_id %} 
                 {%  liquid
-                 render 'shape-picker', product_form_id: product_form_id}
+                 render 'shape-picker', product_form_id: product_form_id
                 %} 
                 {% render 'edge-style-picker', product_form_id: product_form_id %}
               {%- when 'buy_buttons' -%}
@@ -2260,3 +2260,13 @@
   ]
 }
 {% endschema %}
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: 'render ''shape-picker'', product_form_id: product_form_id}'
+  to: 'render ''shape-picker'', product_form_id: product_form_id'
+  position: 26174..26229
+{% endcomment %}

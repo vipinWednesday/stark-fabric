@@ -46,7 +46,7 @@
       assign ratio = 1
     endif
   -%}
-  {%- assign card_product.featured_media = card_product.selected_or_first_available_variant.featured_media -%}
+  {%- assign renamed_variable_card_product_2e_featured_media = card_product.selected_or_first_available_variant.featured_media -%}
   {% assign product_form_id = 'quick-add-' | append: section_id | append: card_product.id %}
 
   <div class="card-wrapper product-card-wrapper underline-links-hover">
@@ -686,3 +686,15 @@
     pointer-events: all !important;
   }
 </style>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- assign card_product.featured_media = card_product.selected_or_first_available_variant.featured_media
+    -%}"
+  to: "{%- assign renamed_variable_card_product_2e_featured_media = card_product.selected_or_first_available_variant.featured_media
+    -%}"
+  position: 2568..2696
+{% endcomment %}

@@ -11,10 +11,10 @@
     {%- assign variant = product.variants | where: 'option1', value | first -%}
     {%- if variant and variant.featured_image -%}
       {%- assign swatch_image_url = variant.featured_image.src | image_url: width: 50 -%}
-      {%- assign value.swatch.image = swatch_image_url -%}
+      {%- assign renamed_variable_value_2e_swatch_2e_image = swatch_image_url -%}
     {%- else -%}
        {%- assign  swatch_image_url = null -%}
-       {%- assign value.swatch.image = null -%}
+       {%- assign renamed_variable_value_2e_swatch_2e_image = nil -%}
     {%- endif -%}
 
     {%- assign option_disabled = true -%}
@@ -45,22 +45,7 @@
         <span class="visually-hidden">{{ value | escape }}</span>
         {{ label_unavailable }}
       {%- endcapture -%}
-      {%
-        render 'swatch-input',
-        id: input_id,
-        name: input_name,
-        value: value | escape,
-        swatch: value.swatch,
-        product_form_id: product_form_id,
-        checked: value.selected,
-        visually_disabled: option_disabled,
-        shape: block.settings.swatch_shape,
-        help_text: help_text,
-        additional_props: input_dataset,
-        swatch_image_url: swatch_image_url
-        variant_id: variant.id
-        product_handle: product.handle
-      %}
+      {% render 'swatch-input', id: input_id, name: input_name, value: value, swatch: value.swatch, product_form_id: product_form_id, checked: value.selected, visually_disabled: option_disabled, shape: block.settings.swatch_shape, help_text: help_text, additional_props: input_dataset, swatch_image_url: swatch_image_url, variant_id: variant.id, product_handle: product.handle %}
     {%- elsif picker_type == 'button' -%}
       <input
         type="radio"
@@ -212,3 +197,39 @@
     });
   });
 </script>
+{% comment %}
+
+This file has been rewritten to preserve the original behavior.
+
+---
+Changes:
+- from: "{%- assign value.swatch.image = swatch_image_url -%}"
+  to: "{%- assign renamed_variable_value_2e_swatch_2e_image = swatch_image_url -%}"
+  position: 451..526
+- from: "{%- assign value.swatch.image = null -%}"
+  to: "{%- assign renamed_variable_value_2e_swatch_2e_image = nil -%}"
+  position: 598..660
+- from: |-
+    {%
+            render 'swatch-input',
+            id: input_id,
+            name: input_name,
+            value: value | escape,
+            swatch: value.swatch,
+            product_form_id: product_form_id,
+            checked: value.selected,
+            visually_disabled: option_disabled,
+            shape: block.settings.swatch_shape,
+            help_text: help_text,
+            additional_props: input_dataset,
+            swatch_image_url: swatch_image_url
+            variant_id: variant.id
+            product_handle: product.handle
+          %}
+  to: "{% render 'swatch-input', id: input_id, name: input_name, value: value, swatch:
+    value.swatch, product_form_id: product_form_id, checked: value.selected, visually_disabled:
+    option_disabled, shape: block.settings.swatch_shape, help_text: help_text, additional_props:
+    input_dataset, swatch_image_url: swatch_image_url, variant_id: variant.id, product_handle:
+    product.handle %}"
+  position: 1627..2000
+{% endcomment %}
